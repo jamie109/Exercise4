@@ -12,7 +12,8 @@ import bob
 #              Written by: Max Spero                                 #
 #              October 22, 2018                                      #
 #              Version 1.0.1                                         #
-#                                                                    #
+#              小组成员：2011428 王天行                                #
+#                       2012679 王娇妹                                #
 ######################################################################
 #
 # In this assignment we will implement a cross-chain atomic swap
@@ -66,14 +67,14 @@ import bob
 # Configured for your addresses
 # 
 # TODO: Fill in all of these fields
-#
+
 # 0.001 每份0.0009
 alice_txid_to_spend     = "19afad7e9a6d2f83b760b827666762a18e9b25c66e8d37098d37f03a478be85f" 
-alice_utxo_index        = 3
+alice_utxo_index        = 2
 alice_amount_to_send    = 0.0009
-# 每份0.00009，这里少一些，0.00008
+#
 bob_txid_to_spend       = "0e978a39565bd40299bce70a67a5fac921dbccfc17fc6527794c438948f20f67"
-bob_utxo_index          = 3
+bob_utxo_index          = 2
 bob_amount_to_send      = 0.00008
 
 # Get current block height (for locktime) in 'height' parameter for each blockchain (and put it into swap.py):
@@ -201,3 +202,209 @@ def atomic_swap(broadcast_transactions=False, alice_redeems=True):
 
 if __name__ == '__main__':
     atomic_swap(broadcast_transactions, alice_redeems)
+##########################################################################
+#
+#                       alice_redeems = False
+#                       output：
+###########################################################################
+'''
+
+Alice swap tx (BTC) created successfully!
+201 Created
+{
+  "tx": {
+    "block_height": -1,
+    "block_index": -1,
+    "hash": "3d30fc4117bd390174350c42e0e353a99e1d070052fdc8efacba5fcbe4ee8ec4",
+    "addresses": [
+      "n4ctyMcqGV3EsfGrmJwyoeiMZqqVCaGqEj"
+    ],
+    "total": 89000,
+    "fees": 11000,
+    "size": 302,
+    "vsize": 302,
+    "preference": "low",
+    "relayed_by": "60.29.153.38",
+    "received": "2022-12-02T14:17:28.542040953Z",
+    "ver": 1,
+    "double_spend": false,
+    "vin_sz": 1,
+    "vout_sz": 1,
+    "confirmations": 0,
+    "inputs": [
+      {
+        "prev_hash": "19afad7e9a6d2f83b760b827666762a18e9b25c66e8d37098d37f03a478be85f",
+        "output_index": 2,
+        "script": "483045022100b2f0bbc9ab6af34927a299028c06c46f41565a6f08a9d71d2d360e9db8b041d2022028148a9fbee4f0d3380ee8f2d2b8904b9da5142246281452c3da2040e618718f0121028c95860ccf90ebf808fa09d5c0bd345d454c8d7a88474878d38bc8e194e8da15",
+        "output_value": 100000,
+        "sequence": 4294967295,
+        "addresses": [
+          "n4ctyMcqGV3EsfGrmJwyoeiMZqqVCaGqEj"
+        ],
+        "script_type": "pay-to-pubkey-hash",
+        "age": 2408900
+      }
+    ],
+    "outputs": [
+      {
+        "value": 89000,
+        "script": "74528763a914853b775079232503df966e626618e1d388a9572088210232d10d2b82b0cff285037945d2ecca91ea4d8d315b4fb2d35f13c23708f398d8ac675221028c95860ccf90ebf808fa09d5c0bd345d454c8d7a88474878d38bc8e194e8da15210232d10d2b82b0cff285037945d2ecca91ea4d8d315b4fb2d35f13c23708f398d852ae68",
+        "addresses": null,
+        "script_type": "unknown"
+      }
+    ]
+  }
+}
+Bob swap tx (BCY) created successfully!
+201 Created
+{
+  "tx": {
+    "block_height": -1,
+    "block_index": -1,
+    "hash": "e7d953db5412716c87eddb81d39982148727d35ba714f5aa5e6a7b8bf975e019",
+    "addresses": [
+      "BywqtdXvDivdjMUBaYF3JD8T92ifaJUpqf"
+    ],
+    "total": 7000,
+    "fees": 2000,
+    "size": 302,
+    "vsize": 302,
+    "preference": "low",
+    "relayed_by": "60.29.153.38",
+    "received": "2022-12-02T14:17:30.414265396Z",
+    "ver": 1,
+    "double_spend": false,
+    "vin_sz": 1,
+    "vout_sz": 1,
+    "confirmations": 0,
+    "inputs": [
+      {
+        "prev_hash": "0e978a39565bd40299bce70a67a5fac921dbccfc17fc6527794c438948f20f67",
+        "output_index": 2,
+        "script": "483045022100ec1f28af6d05342b84e30aa3ff07d7e37c2479d188991a117bd6d530e93ebf270220408c146e5c0c256f525e904051bd5c9835d19eb5fc1f048d5971207d7915927b012102aa31bf6e675f70dbf669ea1545f5b0aa91fcf089189e01854799b7baca3585b5",
+        "output_value": 9000,
+        "sequence": 4294967295,
+        "addresses": [
+          "BywqtdXvDivdjMUBaYF3JD8T92ifaJUpqf"
+        ],
+        "script_type": "pay-to-pubkey-hash",
+        "age": 565975
+      }
+    ],
+    "outputs": [
+      {
+        "value": 7000,
+        "script": "74528763a914853b775079232503df966e626618e1d388a95720882102521ff54ff64fc5689b9636dd9ce25db4bf34d91e5847708dff00e0aa32a1af3cac67522102aa31bf6e675f70dbf669ea1545f5b0aa91fcf089189e01854799b7baca3585b52102521ff54ff64fc5689b9636dd9ce25db4bf34d91e5847708dff00e0aa32a1af3c52ae68",
+        "addresses": null,
+        "script_type": "unknown"
+      }
+    ]
+  }
+}
+Sleeping for 20 minutes to let transactions confirm...
+Bob return coins (BCY) tx created successfully!
+Alice return coins tx (BTC) created successfully!
+'''
+##########################################################################
+##########################################################################
+#
+#                       alice_redeems = True
+#                       output：
+###########################################################################
+'''
+wjm@LAPTOP-EVN3O6SP:~/mypros/Exercise4$ python3 swap.py
+Alice swap tx (BTC) created successfully!
+201 Created
+{
+  "tx": {
+    "block_height": -1,
+    "block_index": -1,
+    "hash": "5ff566a89cf4fefd6287d7ccbceba0bdead77f932be197242b31b9af331366c2",
+    "addresses": [
+      "n4ctyMcqGV3EsfGrmJwyoeiMZqqVCaGqEj"
+    ],
+    "total": 89000,
+    "fees": 11000,
+    "size": 302,
+    "vsize": 302,
+    "preference": "low",
+    "relayed_by": "202.113.19.218",
+    "received": "2022-12-02T15:45:06.803035129Z",
+    "ver": 1,
+    "double_spend": false,
+    "vin_sz": 1,
+    "vout_sz": 1,
+    "confirmations": 0,
+    "inputs": [
+      {
+        "prev_hash": "19afad7e9a6d2f83b760b827666762a18e9b25c66e8d37098d37f03a478be85f",
+        "output_index": 3,
+        "script": "483045022100c6bf3deac01b34fddff02635beccc0298343da76409c529904bd92101897c5490220366e3f25bbd0bc38f778e03014a52fc412ae15589c08484abf026f7c71f474240121028c95860ccf90ebf808fa09d5c0bd345d454c8d7a88474878d38bc8e194e8da15",
+        "output_value": 100000,
+        "sequence": 4294967295,
+        "addresses": [
+          "n4ctyMcqGV3EsfGrmJwyoeiMZqqVCaGqEj"
+        ],
+        "script_type": "pay-to-pubkey-hash",
+        "age": 2408900
+      }
+    ],
+    "outputs": [
+      {
+        "value": 89000,
+        "script": "74528763a914853b775079232503df966e626618e1d388a9572088210232d10d2b82b0cff285037945d2ecca91ea4d8d315b4fb2d35f13c23708f398d8ac675221028c95860ccf90ebf808fa09d5c0bd345d454c8d7a88474878d38bc8e194e8da15210232d10d2b82b0cff285037945d2ecca91ea4d8d315b4fb2d35f13c23708f398d852ae68",
+        "addresses": null,
+        "script_type": "unknown"
+      }
+    ]
+  }
+}
+Bob swap tx (BCY) created successfully!
+201 Created
+{
+  "tx": {
+    "block_height": -1,
+    "block_index": -1,
+    "hash": "e0375500eb0daa09fc1eaaa738f1d3b2ffc6a3db0edf4f95b7ed17bd1ed9091b",
+    "addresses": [
+      "BywqtdXvDivdjMUBaYF3JD8T92ifaJUpqf"
+    ],
+    "total": 7000,
+    "fees": 2000,
+    "size": 301,
+    "vsize": 301,
+    "preference": "low",
+    "relayed_by": "202.113.19.218",
+    "received": "2022-12-02T15:45:08.277148955Z",
+    "ver": 1,
+    "double_spend": false,
+    "vin_sz": 1,
+    "vout_sz": 1,
+    "confirmations": 0,
+    "inputs": [
+      {
+        "prev_hash": "0e978a39565bd40299bce70a67a5fac921dbccfc17fc6527794c438948f20f67",
+        "output_index": 3,
+        "script": "47304402203a50e9181d90aadba16b22f9359ccd5d2b0fb518c5ec5f67263357306eb470d302206de76927eeb6f0cd5e6be99c48cc310ea464af9a3cb51d3b4a0fdfc28c4bca4b012102aa31bf6e675f70dbf669ea1545f5b0aa91fcf089189e01854799b7baca3585b5",
+        "output_value": 9000,
+        "sequence": 4294967295,
+        "addresses": [
+          "BywqtdXvDivdjMUBaYF3JD8T92ifaJUpqf"
+        ],
+        "script_type": "pay-to-pubkey-hash",
+        "age": 565975
+      }
+    ],
+    "outputs": [
+      {
+        "value": 7000,
+        "script": "74528763a914853b775079232503df966e626618e1d388a95720882102521ff54ff64fc5689b9636dd9ce25db4bf34d91e5847708dff00e0aa32a1af3cac67522102aa31bf6e675f70dbf669ea1545f5b0aa91fcf089189e01854799b7baca3585b52102521ff54ff64fc5689b9636dd9ce25db4bf34d91e5847708dff00e0aa32a1af3c52ae68",
+        "addresses": null,
+        "script_type": "unknown"
+      }
+    ]
+  }
+}
+Sleeping for 20 minutes to let transactions confirm...
+Alice redeem from swap tx (BCY) created successfully!
+'''
